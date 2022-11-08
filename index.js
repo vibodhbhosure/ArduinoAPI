@@ -18,7 +18,7 @@ const fireDB = firebase.initializeApp(firebaseConfig)
 let Todo =  fireDB.database(); 
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.sendFile("./pages/index.html")
 });
 
 app.get("/getData", (req, res) => {
