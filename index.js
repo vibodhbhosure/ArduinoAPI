@@ -18,6 +18,10 @@ const fireDB = firebase.initializeApp(firebaseConfig)
 let Todo =  fireDB.database(); 
 
 app.get("/", (req, res) => {
+    res.send("Hello World!");
+});
+
+app.get("/getData", (req, res) => {
     
     var co2 = [];
     var dust = [];
