@@ -26,11 +26,14 @@ app.get("/", (req, res) => {
     res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/getData", (req, res) => {
-    // const { apiKey } = req.body;
-    // if (apiKey !== "Thisisourapikey."){
-    //     res.status(403).sendFile(__dirname + "/failure.html");
-    // }
+app.get("/api/:apiKey/getData", (req, res) => {
+
+    const apiAuth = req.params.apiKey;
+
+    if (apiAuth != "Thisisourapikey") {
+        res.status(403).sendFile(__dirname + "/failure.html");
+    }
+
     let co2 = [];
     let dust = [];
     let epoch = [];
