@@ -56,7 +56,7 @@ app.get("/api/:apiKey/getData", (req, res) => {
                 epoch.push(element[1].epoch);
                 h2.push(element[1].h2);
                 eth.push(element[1].eth);
-                hum.push(element[1].hum);
+                hum.push(element[1].humidity);
                 lat.push(element[1].lat);
                 lon.push(element[1].lon);
                 mq135.push(element[1].mq135);
@@ -144,7 +144,7 @@ app.get("/api/:apiKey/getData/:unix/adjustTime/:adjustTime", (req, res) => {
                 epoch.push(element[1].epoch);
                 h2.push(element[1].h2);
                 eth.push(element[1].eth);
-                hum.push(element[1].hum);
+                hum.push(element[1].humidity);
                 lat.push(element[1].lat);
                 lon.push(element[1].lon);
                 mq135.push(element[1].mq135);
