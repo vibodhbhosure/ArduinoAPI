@@ -318,8 +318,8 @@ app.get("/api/:apiKey/getData/:unix/To/:toTime", (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log("Server is running at port 4000");
-});
+// app.listen(process.env.PORT || 4000, () => {
+//     console.log("Server is running at port 4000");
+// });
 
 exports.app = functions.https.onRequest(app)

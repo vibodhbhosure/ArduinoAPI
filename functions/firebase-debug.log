@@ -17,3 +17,95 @@
 [debug] [2022-12-30T04:26:17.154Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions [none]
 [debug] [2022-12-30T04:26:17.155Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions x-goog-quota-user=projects/arduinogasproject
 [debug] [2022-12-30T04:26:17.155Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-12-30T04:26:18.710Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions 200
+[debug] [2022-12-30T04:26:18.710Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2022-12-30T04:26:18.711Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/arduinogasproject/serviceAccounts/arduinogasproject@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-12-30T04:26:18.711Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/arduinogasproject/serviceAccounts/arduinogasproject@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-12-30T04:26:20.252Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/arduinogasproject/serviceAccounts/arduinogasproject@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-12-30T04:26:20.252Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/arduinogasproject/serviceAccounts/arduinogasproject@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'arduinogasproject'...
+[info] 
+[info] i  deploying functions 
+[info] +  functions: Finished running predeploy script. 
+[debug] [2022-12-30T04:26:20.259Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject [none]
+[debug] [2022-12-30T04:26:20.762Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject 200
+[debug] [2022-12-30T04:26:20.762Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject {"projectId":"arduinogasproject","projectNumber":"888584033864","displayName":"ArduinoGasProject","name":"projects/arduinogasproject","resources":{"hostingSite":"arduinogasproject","realtimeDatabaseInstance":"arduinogasproject-default-rtdb","storageBucket":"arduinogasproject.appspot.com","locationId":"asia-south1"},"state":"ACTIVE","etag":"1_580d579e-faf0-485c-a78c-35d3581c33c6"}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2022-12-30T04:26:20.765Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudfunctions.googleapis.com [none]
+[debug] [2022-12-30T04:26:20.765Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/arduinogasproject
+[debug] [2022-12-30T04:26:20.766Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/runtimeconfig.googleapis.com [none]
+[debug] [2022-12-30T04:26:20.766Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/arduinogasproject
+[debug] [2022-12-30T04:26:20.768Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudbuild.googleapis.com [none]
+[debug] [2022-12-30T04:26:20.768Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudbuild.googleapis.com x-goog-quota-user=projects/arduinogasproject
+[debug] [2022-12-30T04:26:20.769Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/artifactregistry.googleapis.com [none]
+[debug] [2022-12-30T04:26:20.769Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/artifactregistry.googleapis.com x-goog-quota-user=projects/arduinogasproject
+[debug] [2022-12-30T04:26:22.708Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/artifactregistry.googleapis.com 200
+[debug] [2022-12-30T04:26:22.708Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2022-12-30T04:26:22.710Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudfunctions.googleapis.com 200
+[debug] [2022-12-30T04:26:22.711Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2022-12-30T04:26:22.712Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/runtimeconfig.googleapis.com 200
+[debug] [2022-12-30T04:26:22.712Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2022-12-30T04:26:22.743Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudbuild.googleapis.com 200
+[debug] [2022-12-30T04:26:22.743Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/arduinogasproject/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2022-12-30T04:26:22.744Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject/adminSdkConfig [none]
+[debug] [2022-12-30T04:26:23.149Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject/adminSdkConfig 200
+[debug] [2022-12-30T04:26:23.149Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/arduinogasproject/adminSdkConfig {"projectId":"arduinogasproject","databaseURL":"https://arduinogasproject-default-rtdb.firebaseio.com","storageBucket":"arduinogasproject.appspot.com","locationId":"asia-south1"}
+[debug] [2022-12-30T04:26:23.149Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/arduinogasproject/configs [none]
+[debug] [2022-12-30T04:26:23.729Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/arduinogasproject/configs 200
+[debug] [2022-12-30T04:26:23.730Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/arduinogasproject/configs {}
+[info] i  functions: preparing codebase default for deployment 
+[debug] [2022-12-30T04:26:23.733Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2022-12-30T04:26:29.353Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase": "^9.13.0",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-12-30T04:26:29.353Z] Building nodejs source
+[debug] [2022-12-30T04:26:29.356Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-12-30T04:26:29.764Z] Serving at port 9005
+
+[debug] [2022-12-30T04:26:30.080Z] FetchError: request to http://localhost:9005/__/quitquitquit failed, reason: connect ECONNREFUSED ::1:9005
+    at ClientRequest.<anonymous> (C:\Users\vibod\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\node-fetch\lib\index.js:1491:11)
+    at ClientRequest.emit (node:events:513:28)
+    at ClientRequest.emit (node:domain:489:12)
+    at Socket.socketErrorListener (node:_http_client:494:9)
+    at Socket.emit (node:events:513:28)
+    at Socket.emit (node:domain:489:12)
+    at emitErrorNT (node:internal/streams/destroy:151:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:116:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+[error] 
+[error] Error: An unexpected error has occurred.
