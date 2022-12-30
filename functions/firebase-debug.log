@@ -1,0 +1,19 @@
+[debug] [2022-12-30T04:26:16.789Z] ----------------------------------------------------------------------
+[debug] [2022-12-30T04:26:16.791Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\vibod\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2022-12-30T04:26:16.791Z] CLI Version:   11.16.0
+[debug] [2022-12-30T04:26:16.792Z] Platform:      win32
+[debug] [2022-12-30T04:26:16.792Z] Node Version:  v18.12.1
+[debug] [2022-12-30T04:26:16.793Z] Time:          Fri Dec 30 2022 09:56:16 GMT+0530 (India Standard Time)
+[debug] [2022-12-30T04:26:16.793Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-30T04:26:16.868Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-30T04:26:16.869Z] > authorizing via signed-in user (vibodhbhoure@gmail.com)
+[debug] [2022-12-30T04:26:16.869Z] [iam] checking project arduinogasproject for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2022-12-30T04:26:16.870Z] > refreshing access token with scopes: []
+[debug] [2022-12-30T04:26:16.872Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-12-30T04:26:16.872Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-30T04:26:17.121Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-12-30T04:26:17.122Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-30T04:26:17.154Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions [none]
+[debug] [2022-12-30T04:26:17.155Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions x-goog-quota-user=projects/arduinogasproject
+[debug] [2022-12-30T04:26:17.155Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/arduinogasproject:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
