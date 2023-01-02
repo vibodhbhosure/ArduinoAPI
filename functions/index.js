@@ -1,13 +1,25 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const firebase = require("firebase/compat/app");
-// var bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 require("firebase/compat/database");
 var cors = require('cors')
+const accountSid = 'ACe07dd44ce613725a4b2fe734c1865f72';
+const authToken = '6f1fd9687ea1c58a264db91563c49007';
+const client = require('twilio')(accountSid, authToken);
+var nodemailer = require('nodemailer');
 
 const app = express();
 app.use(cors())
-// app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'cmpn.20102a0032@gmail.com',
+        pass: 'stzzbnxbkgfjgcfv'
+    }
+});
 
 const firebaseConfig = {
     apiKey: "AIzaSyAkGsc6urg6wEkV2MmpwKMp208fRlrlPLI",
@@ -256,8 +268,37 @@ app.get("/api/:apiKey/getData/:unix/To/:toTime", (req, res) => {
         });
 });
 
-// app.listen(process.env.PORT || 4000, () => {
-//     console.log("Server is running at port 4000");
-// });
+app.post("/api/alertSMS", async (req, res) => {
+    const { number, messages, email } = req.body;
+    client.messages
+        .create({
+            from: '+14133442271',
+            body: messages,
+            to: number
+        })
+        .then(message => { console.log(message.sid); })
+        .done();
+
+    var mailOptions = {
+        from: 'cmpn.20102a0032@gmail.com',
+        to: email,
+        subject: 'Gas Level Alert!',
+        text: messages
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).send("Email Sent")
+        }
+    });
+
+});
+
+app.listen(process.env.PORT || 4000, () => {
+    console.log("Server is running at port 4000");
+});
 
 exports.app = functions.https.onRequest(app)
