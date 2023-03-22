@@ -1,11 +1,13 @@
 const functions = require("firebase-functions");
+// const { onRequest } = require("firebase-functions/v2/https");
 const express = require("express");
 const firebase = require("firebase/compat/app");
 var bodyParser = require('body-parser');
 require("firebase/compat/database");
+require('dotenv').config()
 var cors = require('cors')
 const accountSid = 'ACe07dd44ce613725a4b2fe734c1865f72';
-const authToken = '6f1fd9687ea1c58a264db91563c49007';
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
 var nodemailer = require('nodemailer');
 
@@ -13,11 +15,12 @@ const app = express();
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'cmpn.20102a0032@gmail.com',
-        pass: 'stzzbnxbkgfjgcfv'
+        pass: process.env.GMAIL_PASS
     }
 });
 
@@ -219,11 +222,134 @@ app.get("/api/:apiKey/getData/:unix/adjustTime/:adjustTime", (req, res) => {
         });
 });
 
+app.get("/api/2/:apiKey/getData/:unix/To/:toTime", (req, res) => {
+    const toTime = Number(req.params.toTime);
+    const unixTime = Number(req.params.unix);
+    const apiAuth = req.params.apiKey;
+
+    const adjustUnixTimeUp = toTime;
+    const adjustUnixTimeDown = unixTime;
+
+    if (apiAuth != "KeyA20222023") {
+        res.sendFile(__dirname + "/failure.html");
+    }
+
+    let co2 = [];
+    let dust = [];
+    let epoch = [];
+    let eth = [];
+    let h2 = [];
+    let hum = [];
+    let lat = [];
+    let lon = [];
+    let mq135 = [];
+    let o3 = [];
+    let temp = [];
+    let voc = [];
+    let indexArr = [];
+
+    let Newco2 = [];
+    let Newdust = [];
+    let Newepoch = [];
+    let Neweth = [];
+    let Newh2 = [];
+    let Newhum = [];
+    let Newlat = [];
+    let Newlon = [];
+    let Newmq135 = [];
+    let Newo3 = [];
+    let Newtemp = [];
+    let Newvoc = [];
+
+    Todo.ref("Todo").once("value")
+        .then((snapshot) => {
+            const data = snapshot.val();
+            Object.entries(data).forEach((element) => {
+                co2.push(element[1].co2);
+                dust.push(element[1].dust);
+                epoch.push(element[1].epoch);
+                h2.push(element[1].h2);
+                eth.push(element[1].eth);
+                hum.push(element[1].humidity);
+                lat.push(element[1].lat);
+                lon.push(element[1].lon);
+                mq135.push(element[1].mq135);
+                o3.push(element[1].o3);
+                temp.push(element[1].temp);
+                voc.push(element[1].voc);
+            });
+
+
+            epoch.forEach((item, index) => {
+                item = Number(item);
+                if (item >= adjustUnixTimeDown && item <= adjustUnixTimeUp) {
+                    indexArr.push(index);
+                }
+            });
+
+            indexArr.forEach((item) => {
+                Newco2.push(co2[item]);
+                Newdust.push(dust[item]);
+                Newepoch.push(epoch[item]);
+                Newh2.push(h2[item]);
+                Neweth.push(eth[item]);
+                Newhum.push(hum[item]);
+                Newlat.push(lat[item]);
+                Newlon.push(lon[item]);
+                Newmq135.push(mq135[item]);
+                Newo3.push(o3[item]);
+                Newtemp.push(temp[item]);
+                Newvoc.push(voc[item]);
+            });
+
+            let newEpoch = [];
+
+            Newepoch.forEach((item, index) => {
+                item = Number(item);
+                item += 19800;
+                var date = new Date(item * 1000);
+                var hours = date.getHours();
+                var minutes = "0" + date.getMinutes();
+                var seconds = "0" + date.getSeconds();
+                item = date + "-" + hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2);
+                newEpoch[index] = item;
+            });
+
+            const datatoSend = {
+                co2: Newco2.map(Number),
+                dust: Newdust.map(Number),
+                epoch: newEpoch,
+                h2: Newh2.map(Number),
+                eth: Neweth.map(Number),
+                hum: Newhum.map(Number),
+                lat: Newlat.slice(-1)[0],
+                lon: Newlon.slice(-1)[0],
+                mq135: Newmq135.map(Number),
+                o3: Newo3.map(Number),
+                temp: Newtemp.map(Number),
+                voc: Newvoc.map(Number)
+            }
+            res.status(200).send(datatoSend);
+        });
+});
 
 app.get("/api/:apiKey/getData/:unix/To/:toTime", (req, res) => {
     const toTime = Number(req.params.toTime);
     const fromTime = Number(req.params.unix);
     const apiAuth = req.params.apiKey;
+
+    let co2 = [];
+    let dust = [];
+    let epoch = [];
+    let eth = [];
+    let h2 = [];
+    let hum = [];
+    let lat = [];
+    let lon = [];
+    let mq135 = [];
+    let o3 = [];
+    let temp = [];
+    let voc = [];
 
     if (apiAuth != "KeyA20222023") {
         res.sendFile(__dirname + "/failure.html");
@@ -268,13 +394,13 @@ app.get("/api/:apiKey/getData/:unix/To/:toTime", (req, res) => {
         });
 });
 
-app.post("/api/alertSMS", async (req, res) => {
+app.post("/api/alertSMS", (req, res) => {
     const { number, messages, email } = req.body;
     client.messages
         .create({
             from: '+14133442271',
             body: messages,
-            to: number
+            to: "+" + number
         })
         .then(message => { console.log(message.sid); })
         .done();
@@ -297,8 +423,42 @@ app.post("/api/alertSMS", async (req, res) => {
 
 });
 
-app.listen(process.env.PORT || 4000, () => {
-    console.log("Server is running at port 4000");
+app.post("/api/SAVE", (req, res) => {
+    const { co2, dust, epoch, h2, eth, hum, lat, lon, mq135, o3, temp, voc } = req.body;
+    var DBdata = Todo.ref("Todo").child(epoch);
+    DBdata.update({ co2: String(co2), dust: String(dust), epoch: String(epoch), eth: String(eth), h2: String(h2), humidity: String(hum), lat: String(lat), lon: String(lon), mq135: String(mq135), o3: String(o3), temp: String(temp), voc: String(voc) }, (err) => {
+        if (err) {
+            res.status(300).response("Error Occured: " + err);
+        }
+        else {
+            res.status(200).send("Data Saved");
+        }
+    })
 });
+
+app.get("/api/getTrigger", (req, res) => {
+    Todo.ref("TriggerData").once("value")
+        .then((snapshot) => {
+            const TriggerData = snapshot.val();
+            res.status(200).send(TriggerData);
+        });
+});
+
+app.post("/api/setTrigger", (req, res) => {
+    const { co2, dust, eth, h2, mq135, o3, voc, hum, lat, lon, temp } = req.body;
+    var DBdata = Todo.ref("TriggerData");
+    DBdata.update({ CO2: String(co2), DUST: String(dust), ETHANOL: String(eth), H2: String(h2), MQ135: String(mq135), O3: String(o3), VOC: String(voc), HUMIDITY: String(hum), LATITUDE: String(lat), LONGITUDE: String(lon), TEMPERATURE: String(temp) }, (err) => {
+        if (err) {
+            res.status(300).response("Error Occured: " + err);
+        }
+        else {
+            res.status(200).send("Trigger Set Successfully!");
+        }
+    })
+});
+
+// app.listen(process.env.PORT || 4000, () => {
+//     console.log("Server is running at port 4000");
+// });
 
 exports.app = functions.https.onRequest(app)
